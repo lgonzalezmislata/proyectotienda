@@ -7,3 +7,7 @@ Página de inicio: `frontend/index.html`.
 
 - Backend: todavía no existe.
 - Frontend: abrir `frontend/index.html` en el navegador.
+
+## Autores
+
+- Lorenzo González
