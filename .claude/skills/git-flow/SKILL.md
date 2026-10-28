@@ -26,17 +26,19 @@ Si `start` o `finish` vienen sin número, lanza el script sin número: él da el
 
 ## commit
 
-Es el único comando en el que piensas: decides cómo agrupar los cambios y escribes los mensajes.
+Es el único comando en el que piensas: decides cómo agrupar los cambios y escribes las descripciones.
 
 1. Lanza `.claude/skills/git-flow/scripts/commit.sh` sin argumentos. Si responde con un mensaje de parada
-   (no hay cambios, no es el worktree, update a medias), cópialo y termina.
+   (no hay cambios, no es el worktree, update a medias) o con la lista de commits, cópialo y termina.
 2. Si no, te enseña los ficheros cambiados y sus diferencias. Lee también los ficheros nuevos (`??`).
    Agrupa los cambios **por intención, no por fichero**: cada grupo es una cosa hecha (una
    funcionalidad, un test, la documentación de algo).
 3. Por cada grupo, lanza:
-   `.claude/skills/git-flow/scripts/commit.sh "type(#N):Título" fichero1 fichero2 ...`
-   - `N` es el número del issue que da el paso 1; `type` es `feat`, `fix`, `test`, `docs`, `refactor` o
-     `chore`; el título, corto, en castellano y con mayúscula inicial: `feat(#12):Formulario de alta`.
+   `.claude/skills/git-flow/scripts/commit.sh "Descripción" fichero1 fichero2 ...`
+   - La descripción es **solo lo que se ha hecho**, corta, en castellano y con mayúscula inicial:
+     `Formulario de alta con validación de NIF`. **Sin `type(#N):` delante**: la rama ya dice de qué
+     issue es, y el `feat(#N):` lo pone `finish` en `develop`.
    - Un directorio nuevo (`?? carpeta/`) se pasa tal cual, como `carpeta/`.
-   - Si responde «Mensaje no válido…», corrige el mensaje o los ficheros y repítelo.
-4. Cuando no queden cambios, el script responde con la lista de commits de la rama: esa es tu respuesta.
+   - Si responde «El fichero X no tiene cambios: quítalo del commit», quita ese fichero y repítelo.
+4. Tras el último grupo, el script sube la rama a GitHub y responde con la lista de commits de la rama:
+   esa es tu respuesta.
